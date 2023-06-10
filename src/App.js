@@ -11,12 +11,23 @@ function Square({ value, onSquareClick }) {
 }
 
 export default function Board() {
+  // state for determining player
+  const [xIsNext, setXIsNext] = useState(true);
+  // state for each square on board
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+
+    // determine turn for X or O player
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
