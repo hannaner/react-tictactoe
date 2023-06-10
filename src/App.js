@@ -17,6 +17,11 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
+    // prevent square from being overwritten
+    if (squares[i]) {
+      return;
+    }
+
     const nextSquares = squares.slice();
 
     // determine turn for X or O player
