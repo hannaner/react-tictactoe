@@ -1,14 +1,5 @@
 import { useState } from "react";
-
-function Square({ value, onSquareClick }) {
-  return (
-    <>
-      <button className="square" onClick={onSquareClick}>
-        {value}
-      </button>
-    </>
-  );
-}
+import Square from "./Square";
 
 export default function Board() {
   // state for determining player
