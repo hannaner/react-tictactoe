@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Square from "./Square";
 
-export default function Board({ xIsNext, setXIsNext }) {
+export default function Board({ xIsNext, squares, onPlay }) {
   // state for each square on board
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  //   const [squares, setSquares] = useState(Array(9).fill(null));
+  // taken out so that the squares state is now handled by Game component, and is passed to onPlay function
 
   function handleClick(i) {
     // prevent square from being overwritten and end game if there is a winner determined
@@ -20,8 +21,7 @@ export default function Board({ xIsNext, setXIsNext }) {
       nextSquares[i] = "O";
     }
 
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
   // show status of game: who the winner is or next turn
