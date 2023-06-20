@@ -1,11 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Square from "./Square";
 
 export default function Board({ xIsNext, squares, onPlay }) {
-  // state for each square on board
-  //   const [squares, setSquares] = useState(Array(9).fill(null));
-  // taken out so that the squares state is now handled by Game component, and is passed to onPlay function
-
   function handleClick(i) {
     // prevent square from being overwritten and end game if there is a winner determined
     if (squares[i] || calculateWinner(squares)) {
@@ -30,6 +26,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
   let status;
   if (winner) {
     status = "Winner: " + winner;
+    // NEXT: HANDLE STATE WHEN THERE IS NO WINNER
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
