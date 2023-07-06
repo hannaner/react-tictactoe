@@ -8,16 +8,22 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   // ???? why is this useState holding the Array explicitly in '[]' compared to the state in
   // const [squares, setSquares] = useState(Array(9).fill(null));
-  const currentSquares = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares = history[currentMove];
 
   // function to determine if there is a winner or who's turn is next
   function handlePlay(nextSquares) {
-    setHistory([...history, nextSquares]);
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]
+    setHistory(nextHistory)
+    setCurrentMove(nextHistory.length - 1)
     setXIsNext(!xIsNext);
   }
 
   // play history
-  function jumpTo(nextMove) {}
+  function jumpTo(nextMove) {
+    setCurrentMove(nextMove);
+    setXIsNext(nextMove % 2 === 0);
+  }
 
   const moves = history.map((squares, move) => {
     let description;
@@ -27,7 +33,7 @@ export default function Game() {
       description = "Go to game start";
     }
     return (
-      <li>
+      <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     );
